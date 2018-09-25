@@ -1,0 +1,36 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-lg-6 ml-auto mr-auto text-center">
+    <nb-card accent="info">
+      <nb-card-header>
+        <img class="rounded mr-auto ml-auto mt-2 card-img-top" style="width: 200px; height: 200px;" *ngIf="userModel.profile.image != ''; else else_image"
+          src="/images/{{userModel.profile.image}}" alt="{{ userModel.profile.first_name }}">
+
+        <ng-template #else_image>
+          <img class="rounded ml-auto mr-auto mt-2 card-img-top" style="width: 200px; height: 200px;" src="/images/no_user.png" alt="{{ userModel.profile.first_name }}">
+        </ng-template>
+      </nb-card-header>
+      <nb-card-body>
+        <h5 class="card-title">{{userModel.profile.name}}</h5>
+        <p class="card-text">{{userModel.email}}</p>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-4 ml-auto mr-auto text-center" *ngIf="blogsLoaded | async">
+    <nb-card accent="danger">
+      <nb-card-header>
+        My Blogs
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list *ngIf="blogs.length > 0; else blogs_else">
+          <nb-list-item *ngFor="let blog of blogs.slice(0, 5);" class="text-left">
+            <nb-user [name]="blog.title" [title]="blog.description">
+            </nb-user>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+      <nb-card-footer>
+        <a routerLink="/my-blogs" class="text-success">View All <i class="fas fa-angle-double-down" style="font-size: 1rem !important"></i></a>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>

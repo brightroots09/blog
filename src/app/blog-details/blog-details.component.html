@@ -1,0 +1,54 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-8 ml-auto mr-auto">
+    <nb-card accent="info">
+      <nb-card-header>
+        {{ blogModel.title | uppercase }}
+      </nb-card-header>
+      <nb-card-body>
+        {{ blogModel.description }}
+      </nb-card-body>
+      <nb-card-footer class="text-right">
+        {{ blogModel.date_created | date:'mediumDate' }}
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-8 ml-auto mr-auto">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="message">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <form *ngIf="_authService.loggedIn(); else login_else" (ngSubmit)="onFormSubmit()" class="mb-3 form-inline">
+      <input type="text" id="title" class="ml-auto mr-auto form-control w-75" placeholder="Enter your comment..." name="comment" [(ngModel)]="newComment.description">
+      <button nbButton outline status="primary" size="xsmall">Add</button>
+    </form>
+
+    <ng-template #login_else>
+      <h5 class="text-center">
+        <a class="text-danger" routerLink="/login">Login</a> to comment</h5>
+    </ng-template>
+
+    <nb-list *ngIf="commentModel.length > 0; else comment_else">
+      <nb-list-item *ngFor="let comment of commentModel" class="text-left">
+        <div class="row">
+          <div class="col-md-10">
+            <nb-user [name]="comment.comment" [title]="comment.user_id.profile.name">
+            </nb-user>
+          </div>
+          <div class="col-md-2 text-right">
+            <small>
+              {{ comment.date_created | date:'mediumDate' }}
+            </small>
+          </div>
+        </div>
+      </nb-list-item>
+    </nb-list>
+    <ng-template #comment_else>
+      No Comments
+    </ng-template>
+  </div>
+</div>

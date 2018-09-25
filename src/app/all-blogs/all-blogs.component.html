@@ -1,0 +1,25 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <ng-container *ngIf="blogs.length > 0; else blog_else">
+    <div class="col-md-4" *ngFor="let blog of blogs">
+      <nb-card>
+        <nb-card-header>
+          {{ blog.title | uppercase }}
+        </nb-card-header>
+        <nb-card-body>
+          {{ blog.description.slice(0, 150) }}...
+          <a class="text-info" routerLink="/blog/{{ blog._id }}">View
+            <i class="fas fa-angle-double-right" style="font-size: 1rem !important"></i>
+          </a>
+        </nb-card-body>
+        <nb-card-footer class="text-right">
+          Created By: {{ blog.user_id.profile.name }} {{ blog.date_created | date:'mediumDate' }}
+        </nb-card-footer>
+      </nb-card>
+    </div>
+    <ng-template #blog_else>
+      <div class="col-md-6 offset-md-3 text-center">
+        No Blogs!
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

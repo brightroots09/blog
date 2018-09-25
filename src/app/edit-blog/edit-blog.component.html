@@ -1,0 +1,34 @@
+<div class="row" *ngIf="filtersLoaded | async">
+  <div class="col-md-6 ml-auto mr-auto">
+    <nb-card accent="warning">
+      <nb-card-header text-center>
+        Edit Blog
+      </nb-card-header>
+      <nb-card-body>
+        <form #blogForm="ngForm" (ngSubmit)="onFormSubmit()" class="mb-3">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <label for="title">Title: </label>
+                <input type="text" id="title" #title="ngModel" class="form-control" name="title" [(ngModel)]="blogModel.title"
+                  [class.is-invalid]="title.invalid && title.touched" [class.is-valid]="title.valid && title.touched"
+                  required>
+                <small class="text-danger" [class.d-none]="title.valid || title.untouched">Title is required</small>
+              </div>
+              <div class="col-md-12">
+                <label for="description">Description: </label>
+                <textarea type="text" id="description" #description="ngModel" class="form-control" name="description" [(ngModel)]="blogModel.description"
+                  [class.is-invalid]="description.invalid && description.touched" [class.is-valid]="description.valid && description.touched"
+                  required>
+                </textarea>
+                <small class="text-danger" [class.d-none]="description.valid || description.untouched">Description is required</small>
+              </div>
+            </div>
+          </div>
+          <button nbButton outline status="primary" [disabled]="blogForm.form.invalid" size="xsmall" class="mr-2">Update</button>
+          <button nbButton outline status="danger" size="xsmall" class="mr-2" (click)="cancelUpdate()">Cancel</button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
