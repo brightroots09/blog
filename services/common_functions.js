@@ -125,7 +125,7 @@ function addBlog(db, condition, cb) {
     model.user_id = condition.user_id;
     model.title = condition.title;
     model.description = condition.description;
-    mode.date_created = date;
+    model.date_created = date;
 
     model.save(function (error, result) {
         if (error) cb(error)
