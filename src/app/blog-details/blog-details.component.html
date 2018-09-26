@@ -20,12 +20,13 @@
 </div>
 <div class="row" *ngIf="filtersLoaded | async">
   <div class="col-md-8 ml-auto mr-auto">
-      <nb-alert status="danger" closable (click)="onClose()" class="text-center" *ngIf="message">
-          {{ message }}
-      </nb-alert>
+    <nb-alert status="danger" closable (click)="onClose()" class="text-center" *ngIf="message">
+      {{ message }}
+    </nb-alert>
 
     <form *ngIf="_authService.loggedIn(); else login_else" (ngSubmit)="onFormSubmit()" class="mb-3 form-inline">
-      <input type="text" id="title" class="ml-auto mr-auto form-control w-75" placeholder="Enter your comment..." name="comment" [(ngModel)]="newComment.description">
+      <input type="text" id="title" class="ml-auto mr-auto form-control w-75" placeholder="Enter your comment..." name="comment"
+        [(ngModel)]="newComment.description">
       <button nbButton outline status="primary" size="xsmall">Add</button>
     </form>
 
@@ -37,14 +38,19 @@
     <nb-list *ngIf="commentModel.length > 0; else comment_else">
       <nb-list-item *ngFor="let comment of commentModel" class="text-left">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-9">
             <nb-user [name]="comment.comment" [title]="comment.user_id.profile.name">
             </nb-user>
           </div>
-          <div class="col-md-2 text-right">
+          <div class="col-md-* text-right">
             <small>
               {{ comment.date_created | date:'mediumDate' }}
             </small>
+          </div>
+          <div class="col-md-1" *ngIf="userModel == comment.user_id._id">
+            <a class="text-danger" (click)="deleteComment(comment._id)">
+              <i class="fas fa-minus-circle" style="font-size: 1rem !important"></i>
+            </a>
           </div>
         </div>
       </nb-list-item>

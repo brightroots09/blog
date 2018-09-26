@@ -59,4 +59,9 @@ export class UserService {
     return this.http.post<any>(this._blogsUrl, data)
   }
 
+  deleteComment(id): Observable<any>{
+    let url = this._deleteCommentsUrl + "/" + id
+    return this.http.post<any>(url, id)
+  }
+
 }

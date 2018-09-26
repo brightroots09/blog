@@ -13,6 +13,7 @@ import { AuthService } from '../auth.service'
 export class BlogDetailsComponent implements OnInit {
 
   blogModel;
+  userModel;
   commentModel;
   param;
   newComment = new Comment();
@@ -31,9 +32,17 @@ export class BlogDetailsComponent implements OnInit {
   ngOnInit() {
     try {
       this.blogDetails()
+      this.getProfile()
     } catch (error) {
       return error
     }
+  }
+
+  getProfile(){
+    this.user.profile()
+      .subscribe(res => {
+        this.userModel = res._id
+      })
   }
 
   blogDetails(){
@@ -65,6 +74,15 @@ export class BlogDetailsComponent implements OnInit {
 
   onClose(){
     this.message = null
+  }
+
+  deleteComment(id){
+    this.user.deleteComment(id)
+      .subscribe(res => {
+        window.location.reload()
+      }, error => {
+        console.error(error)
+      })
   }
 
 }
