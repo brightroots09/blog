@@ -63,4 +63,8 @@ export class BlogDetailsComponent implements OnInit {
     }
   }
 
+  onClose(){
+    this.message = null
+  }
+
 }

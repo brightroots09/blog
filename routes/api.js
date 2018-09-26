@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const path = require("path");
+var path = require('path');
+var multer = require('multer');
 
 const moment = require("moment");
 

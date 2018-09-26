@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { NbThemeModule, NbSidebarModule, NbLayoutModule,  NbMenuModule, NbMenuService, NbSidebarService, NbCardModule, NbTabsetModule, NbAccordionModule, NbButtonModule, NbUserModule, NbListModule } from '@nebular/theme';
+import { NbThemeModule, NbSidebarModule, NbLayoutModule,  NbMenuModule, NbMenuService, NbSidebarService, NbCardModule, NbTabsetModule, NbAccordionModule, NbButtonModule, NbUserModule, NbListModule, NbAlertModule } from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
@@ -49,7 +49,8 @@ import { AllBlogsComponent } from './all-blogs/all-blogs.component';
     NbAccordionModule,
     NbButtonModule,
     NbUserModule,
-    NbListModule
+    NbListModule,
+    NbAlertModule
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS,

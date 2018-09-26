@@ -52,8 +52,11 @@ export class UserService {
 
   insertComment(data, id): Observable<any>{
     let url = this._commentsUrl + "/" + id
-    return this.http.post(url, data)
+    return this.http.post<any>(url, data)
   }
 
+  addBlog(data): Observable<any>{
+    return this.http.post<any>(this._blogsUrl, data)
+  }
 
 }

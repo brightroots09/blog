@@ -2,7 +2,12 @@
   <div class="col-md-8 ml-auto mr-auto">
     <nb-card accent="info">
       <nb-card-header>
-        {{ blogModel.title | uppercase }}
+        <div class="row">
+          <div class="col-md-6">{{ blogModel.title | uppercase }}</div>
+          <div class="col-md-6 text-right">
+            <small>By: {{ blogModel.user_id.profile.name }}</small>
+          </div>
+        </div>
       </nb-card-header>
       <nb-card-body>
         {{ blogModel.description }}
@@ -15,12 +20,9 @@
 </div>
 <div class="row" *ngIf="filtersLoaded | async">
   <div class="col-md-8 ml-auto mr-auto">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="message">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+      <nb-alert status="danger" closable (click)="onClose()" class="text-center" *ngIf="message">
+          {{ message }}
+      </nb-alert>
 
     <form *ngIf="_authService.loggedIn(); else login_else" (ngSubmit)="onFormSubmit()" class="mb-3 form-inline">
       <input type="text" id="title" class="ml-auto mr-auto form-control w-75" placeholder="Enter your comment..." name="comment" [(ngModel)]="newComment.description">

@@ -1,3 +1,46 @@
-<p>
-  add-blog works!
-</p>
+<div class="row">
+  <div class="col-md-10 ml-auto mr-auto">
+    <nb-alert status="success" closable (click)="onClose()" class="text-center" *ngIf="message.info !== '' || message.data !== ''">
+      <h5>{{ message.info }}</h5>
+      <p>
+        Title: {{ message.data.title }}
+      </p>
+      <p>
+        Description: {{ message.data.description }}
+      </p>
+      <a routerLink="/my-blogs" nbButton outline status="primary" size="xsmall">View All Blogs
+        <i class="fas fa-angle-double-down" style="font-size: 1rem !important"></i>
+      </a>
+    </nb-alert>
+
+    <nb-card accent="info">
+      <nb-card-header>
+        Add Blogs
+      </nb-card-header>
+      <nb-card-body>
+        <form #blogForm="ngForm" (ngSubmit)="onFormSubmit()" class="mb-3">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="title">Title: </label>
+                <input type="text" id="title" #title="ngModel" class="form-control" name="title" [(ngModel)]="blogModel.title" [class.is-invalid]="title.invalid && title.touched"
+                  [class.is-valid]="title.valid && title.touched" required>
+                <small class="text-danger" [class.d-none]="title.valid || title.untouched">Title is required</small>
+              </div>
+              <div class="form-group">
+                <label for="description">Description: </label>
+                <textarea type="text" id="description" #description="ngModel" class="form-control" name="description" [(ngModel)]="blogModel.description"
+                  [class.is-invalid]="description.invalid && description.touched" [class.is-valid]="description.valid && description.touched"
+                  required>
+                      </textarea>
+                <small class="text-danger" [class.d-none]="description.valid || description.untouched">Description is required</small>
+              </div>
+            </div>
+          </div>
+          <button nbButton outline status="primary" [disabled]="blogForm.form.invalid" size="xsmall" class="mr-2">Update</button>
+          <button nbButton outline status="danger" size="xsmall" class="mr-2" (click)="cancelUpdate()">Cancel</button>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
