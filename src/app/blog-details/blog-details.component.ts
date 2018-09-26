@@ -39,10 +39,15 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   getProfile(){
-    this.user.profile()
-      .subscribe(res => {
-        this.userModel = res._id
-      })
+    if(this._authService.loggedIn()){
+      this.user.profile()
+        .subscribe(res => {
+          this.userModel = res._id
+        })
+    }
+    else{
+      return false
+    }
   }
 
   blogDetails(){

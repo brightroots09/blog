@@ -11,6 +11,7 @@ import { UserService } from '../user.service';
 export class RegisterComponent implements OnInit {
 
   userModel = new User()
+  message;
   
   constructor(private _router: Router, private user: UserService) { }
 
@@ -21,10 +22,19 @@ export class RegisterComponent implements OnInit {
     this.user.register(this.userModel)
     .subscribe(
       res => {
+        if(res == 'Email Already Exists'){
+          this.message = res
+        }
+        else{
           this._router.navigate(["/login"])
-        },
+        }
+      },
         error => console.log(error)
       )
+  }
+
+  onClose(){
+    this.message = null
   }
 
 }
