@@ -23,7 +23,7 @@
       <nb-card-body>
         <nb-list *ngIf="blogs.length > 0; else blogs_else">
           <nb-list-item *ngFor="let blog of blogs.slice(0, 5);" class="text-left">
-            <nb-user [name]="blog.title" [title]="blog.description.slice(0, 100) + '...'">
+            <nb-user [name]="blog.title" [title]="blog.description.slice(0, 100) + ' ...'">
             </nb-user>
           </nb-list-item>
         </nb-list>
