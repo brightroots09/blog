@@ -84,6 +84,7 @@ function getBlogs(blogModel, userModel, cb) {
     blogModel
         .find({})
         .populate({path: "user_id", model: userModel})
+        .sort({_id: -1})
         .exec(function (error, result) {
             if (error) cb(error)
             else {
@@ -96,6 +97,7 @@ function getBlogs(blogModel, userModel, cb) {
 function myBlogs(blogModel, condition, cb) {
     blogModel
         .find({user_id: condition.user_id})
+        .sort({_id: -1})
         .exec(function (error, result) {
             if (error) cb(error)
             else {
@@ -187,6 +189,7 @@ function getComments(commentModel, userModel, id, cb){
     commentModel
         .find({blog_id: id})
         .populate({path: "user_id", model: userModel})
+        .sort({_id: -1})
         .exec(function(error, result){
             if(error) cb(error)
             else{
