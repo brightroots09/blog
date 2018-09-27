@@ -10,7 +10,8 @@
         </div>
       </nb-card-header>
       <nb-card-body>
-        {{ blogModel.description }}
+          <div [innerHTML]="blogModel.description | keepHtml">
+          </div>
       </nb-card-body>
       <nb-card-footer class="text-right">
         {{ blogModel.date_created | date:'mediumDate' }}

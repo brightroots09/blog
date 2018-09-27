@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { User } from '../user';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: 'app-edit-blog',
   templateUrl: './edit-blog.component.html',
@@ -13,6 +15,9 @@ export class EditBlogComponent implements OnInit {
   blogModel;
   param;
   filtersLoaded: Promise<boolean>;
+
+  public Editor = ClassicEditor;
+  descriptionError: boolean = false;
 
   constructor(private router: Router, private user: UserService, private route: ActivatedRoute) {
 
@@ -42,10 +47,16 @@ export class EditBlogComponent implements OnInit {
   }
 
   onFormSubmit(){
-    this.user.editBlog(this.param.id, this.blogModel)
-      .subscribe(res => {
-        this.router.navigate([`/blog/${this.param.id}`])
-      })
+    if(this.blogModel.description == '' || this.blogModel.description == '<p>&nbsp;</p>'){
+      this.descriptionError = true
+    }
+    else{
+      this.descriptionError = false
+      this.user.editBlog(this.param.id, this.blogModel)
+        .subscribe(res => {
+          this.router.navigate([`/blog/${this.param.id}`])
+        })
+    }
   }
 
   cancelUpdate(){

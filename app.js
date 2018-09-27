@@ -16,6 +16,7 @@ const session = require('express-session');
 const cookieParser = require("cookie-parser")
 const mongoStore = require("connect-mongo")(session)
 const passport = require("passport");
+var cors = require('cors')
 
 //db connection
 const url = "mongodb://root:qwertyuiop09@ds161026.mlab.com:61026/blog";
@@ -27,6 +28,7 @@ mongoose.connect(url, { useNewUrlParser: true }, function(error){
 
 //morgan middleware
 app.use(morgan("dev"));
+app.use(cors())
 
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));

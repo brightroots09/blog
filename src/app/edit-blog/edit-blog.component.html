@@ -17,11 +17,16 @@
               </div>
               <div class="col-md-12">
                 <label for="description">Description: </label>
-                <textarea type="text" id="description" #description="ngModel" class="form-control" name="description" [(ngModel)]="blogModel.description"
+                <!-- <textarea type="text" id="description" #description="ngModel" class="form-control" name="description" [(ngModel)]="blogModel.description"
                   [class.is-invalid]="description.invalid && description.touched" [class.is-valid]="description.valid && description.touched"
                   required>
                 </textarea>
-                <small class="text-danger" [class.d-none]="description.valid || description.untouched">Description is required</small>
+                <small class="text-danger" [class.d-none]="description.valid || description.untouched">Description is required</small> -->
+
+                <ckeditor [editor]="Editor" #description="ngModel" name="description" [(ngModel)]="blogModel.description" [class.is-invalid]="description.invalid && description.touched" [class.is-valid]="description.valid && description.touched" required></ckeditor>
+                
+                <small class="text-danger" [class.d-none]="!descriptionError">Description is required</small>
+
               </div>
             </div>
           </div>

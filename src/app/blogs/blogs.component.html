@@ -16,7 +16,9 @@
 					</div>
 				</nb-card-header>
 				<nb-card-body>
-					{{ blog.description.slice(0, 150) }}... <a class="text-info" routerLink="/blog/{{ blog._id }}">View <i class="fas fa-angle-double-right" style="font-size: 1rem !important"></i></a>
+					<div [innerHTML]="blog.description.slice(0, 150) | keepHtml">
+					</div>
+					<a class="text-info" routerLink="/blog/{{ blog._id }}">View more <i class="fas fa-angle-double-right" style="font-size: 1rem !important"></i></a>
 				</nb-card-body>
 				<nb-card-footer class="text-right">
 					{{ blog.date_created | date:'mediumDate' }}

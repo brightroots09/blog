@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { EscapeHtmlPipe } from './keep-html.pipe';
+
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -21,6 +23,8 @@ import { AddBlogComponent } from './add-blog/add-blog.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,8 @@ import { AllBlogsComponent } from './all-blogs/all-blogs.component';
     PageNotFoundComponent,
     AddBlogComponent,
     EditBlogComponent,
-    AllBlogsComponent
+    AllBlogsComponent,
+    EscapeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import { AllBlogsComponent } from './all-blogs/all-blogs.component';
     NbButtonModule,
     NbUserModule,
     NbListModule,
-    NbAlertModule
+    NbAlertModule,
+    CKEditorModule
   ],
   providers: [AuthGuard, {
     provide: HTTP_INTERCEPTORS,
